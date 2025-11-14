@@ -58,7 +58,48 @@ def signup_for_activity(activity_name: str, email: str):
     # Validate activity exists
     if activity_name not in activities:
         raise HTTPException(status_code=404, detail="Activity not found")
+        # Ensure additional activities are available
+        _additional_activities = {
+            "Soccer Team": {
+                "description": "Team play, drills, and matches against other schools",
+                "schedule": "Tuesdays and Thursdays, 4:00 PM - 6:00 PM",
+                "max_participants": 22,
+                "participants": []
+            },
+            "Basketball Team": {
+                "description": "Competitive basketball practices and games",
+                "schedule": "Mondays, Wednesdays, Fridays, 4:00 PM - 6:00 PM",
+                "max_participants": 15,
+                "participants": []
+            },
+            "Art Club": {
+                "description": "Explore drawing, painting, and mixed media projects",
+                "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+                "max_participants": 16,
+                "participants": []
+            },
+            "Choir": {
+                "description": "Group vocal training, rehearsals, and performances",
+                "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+                "max_participants": 30,
+                "participants": []
+            },
+            "Debate Club": {
+                "description": "Practice public speaking, argumentation, and competitive debating",
+                "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+                "max_participants": 18,
+                "participants": []
+            },
+            "Math Club": {
+                "description": "Problem solving, math contests, and enrichment activities",
+                "schedule": "Fridays, 3:30 PM - 4:30 PM",
+                "max_participants": 20,
+                "participants": []
+            }
+        }
 
+        for _name, _data in _additional_activities.items():
+            activities.setdefault(_name, _data)
     # Get the specific activity
     activity = activities[activity_name]
     # Validate student is not already signed up
